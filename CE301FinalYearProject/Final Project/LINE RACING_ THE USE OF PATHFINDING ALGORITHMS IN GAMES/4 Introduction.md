@@ -1,0 +1,3 @@
+# Introduction
+
+Artificial intelligence in games, as in computer science, is a challenging concept which produces many problems but not always the right solutions. However, over the years, games have seen an increase in popularity and have also become a lot more easily accessible. Therefore, the quality of the software behind their development has had to keep up with the demand and the use of AI in games has now become an essential part of modern-day game development. I will be presenting a brief overview of the use of AI in games and will provide a review on the strategies used to power these AI with a focus on decision behaviours, for AI agents.
