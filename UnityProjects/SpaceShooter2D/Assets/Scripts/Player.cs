@@ -29,16 +29,17 @@ public class Player : MonoBehaviour
 
         transform.Translate(moveDir * _speed * Time.deltaTime);
 
+    //restricting player movement in the y plane between -3.9, 0
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.9f, 0), 0);
 
-        if (transform.position.x >= 11.2f)
+        if (transform.position.x >= 9.5f)
         {
-            transform.position = new Vector3(-11, transform.position.y, 0);
+            transform.position = new Vector3(-9.5f, transform.position.y, 0);
 
         }
-        else if (transform.position.x <= -11.2f)
+        else if (transform.position.x <= -9.5f)
         {
-            transform.position = new Vector3(11, transform.position.y, 0);
+            transform.position = new Vector3(9.5f, transform.position.y, 0);
 
         }
 
