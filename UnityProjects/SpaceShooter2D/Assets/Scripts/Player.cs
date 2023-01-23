@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private float _speed = 3.5f;
     private float _fireRate = 0.2f;
     private float _nextFire = 0.0f;
-    private bool dead = false;
+    public bool _isDead = false;
 
     void Start()
     {
@@ -43,14 +43,14 @@ public class Player : MonoBehaviour
     //clamping player movement in the y plane between -3.9, 0
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.9f, 0), 0);
 
-        if (transform.position.x >= 9.5f)
+        if (transform.position.x >= 11.0f)
         {
-            transform.position = new Vector3(-9.5f, transform.position.y, 0);
+            transform.position = new Vector3(-11.0f, transform.position.y, 0);
 
         }
-        else if (transform.position.x <= -9.5f)
+        else if (transform.position.x <= -11.0f)
         {
-            transform.position = new Vector3(9.5f, transform.position.y, 0);
+            transform.position = new Vector3(11.0f, transform.position.y, 0);
 
         }
     }
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     void FireLaser()
     {
         _nextFire = Time.time + _fireRate;
-        Instantiate(_laser, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+        Instantiate(_laser, transform.position + new Vector3(0, 1.0f, 0), Quaternion.identity);
 
     }
 
@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
 
         if (_lives < 1)
         {
+            _isDead = true;
             Destroy(this.gameObject);
 
         }
