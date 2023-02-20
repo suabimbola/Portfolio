@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private float _speed = 4.0f;
+    private float _speed = 4f;
     private Player _player;
 
     void Start()
@@ -23,12 +23,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (_player._isDead)
-        {
-            Destroy(this.gameObject, 3);
-
-        }
-
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
         if (transform.position.y < -5.4f)
@@ -37,13 +31,19 @@ public class Enemy : MonoBehaviour
             transform.position = new Vector3(randX, 7, 0);
 
         }
+
+        if (_player._isDead)
+        {
+            Destroy(this.gameObject, 3);
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            other.transform.GetComponent<Player>().Damage();
+            _player.Damage();
             Destroy(this.gameObject);
 
         }
@@ -51,6 +51,7 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Laser")
         {
             Destroy(other.gameObject);
+            _player.AddScore(10);
             Destroy(this.gameObject);
             
         }
