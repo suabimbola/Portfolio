@@ -10,7 +10,8 @@ public class SpawnManager : MonoBehaviour
     private GameObject _spawnedEnemies;
     [SerializeField]
     private GameObject[] _powerUps;
-
+    [SerializeField]
+    private GameObject _startText;
 
     private Player _player;
 
@@ -24,6 +25,10 @@ public class SpawnManager : MonoBehaviour
 
         }
 
+    }
+
+    public void StartSpawn()
+    {
         StartCoroutine(SpawnEnemy());
         StartCoroutine(SpawnPowerUp());
 
@@ -31,6 +36,10 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
+        yield return new WaitForSeconds(2f);
+        _startText.SetActive(false);
+
+        yield return new WaitForSeconds(1f);
         while (_player._isDead == false)
         {
             Vector3 enemyPos = new Vector3(Random.Range(-8f, 8f), 7, 0);
@@ -43,7 +52,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPowerUp()
     {
-        yield return new WaitForSeconds(Random.Range(1f, 8f));
+        yield return new WaitForSeconds(Random.Range(3f, 8f));
 
         while(_player._isDead == false)
         {

@@ -11,7 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _playerShield;
     [SerializeField]
-    private int _lives = 3;
+    private GameObject _explosion;
+    [SerializeField]
+    private GameObject[] _engines;
 
     private UIManager _uiManager;
     private float _speed = 3.5f;
@@ -21,6 +23,8 @@ public class Player : MonoBehaviour
     private bool _tripleShot = false;
     private bool _speedBoost = false;
     private bool _shield = false;
+    private bool _damage = false;
+    private int _lives = 3;
     private int _score;
 
     public bool _isDead = false;
@@ -102,13 +106,35 @@ public class Player : MonoBehaviour
 
         }
 
+        _damage = true;
         _lives--;
         _uiManager.UpdateLives(_lives);
+
+        while(_damage == true)
+        {
+            for(int i = 0; i < 1; i++)
+            {
+                int randomEngine = Random.Range(0, 2);
+                if(!_engines[randomEngine].activeSelf)
+                {
+                    _engines[randomEngine].SetActive(true);
+                    _damage = false;
+
+                }
+                else if(_engines[0].activeSelf && _engines[1].activeSelf)
+                {
+                    _damage = false;
+                }
+                else i--;
+
+            }
+        }
 
         if (_lives < 1)
         {
             _isDead = true;
-            Destroy(this.gameObject);
+            Instantiate(_explosion, transform.position, Quaternion.identity);
+            Destroy(this.gameObject, 0.25f);
 
         }
     }

@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     private float _speed = 4f;
     private Player _player;
+    private Animator _enemyAnim;
 
     void Start()
     {
@@ -14,6 +15,14 @@ public class Enemy : MonoBehaviour
         if (_player == null)
         {
             Debug.LogError("Player not found.");
+
+        }
+
+        _enemyAnim = GetComponent<Animator>();
+
+        if(_enemyAnim == null)
+        {
+            Debug.LogError("Enemy animator not found.");
 
         }
 
@@ -39,12 +48,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             _player.Damage();
-            Destroy(this.gameObject);
+            _enemyAnim.SetTrigger("EnemyDeath");
+            _speed = 0;
+            Destroy(this.gameObject, 2.38f);
 
         }
         
@@ -52,7 +63,9 @@ public class Enemy : MonoBehaviour
         {
             Destroy(other.gameObject);
             _player.AddScore(10);
-            Destroy(this.gameObject);
+            _enemyAnim.SetTrigger("EnemyDeath");
+            _speed = 0;
+            Destroy(this.gameObject, 2.38f);
             
         }
     }
