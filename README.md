@@ -7,7 +7,7 @@ IG11 0LR
 07869408426
 suabimbola@gmail.com
 
-##Welcome!
+## Welcome!
 
 I've created this portfolio to express my interest as an aspiring game developer with hopes to show my creativity -  willingness to learn and challenge new concepts and ideas as I journey towards my goal of working in the industry.
 
